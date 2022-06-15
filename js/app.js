@@ -1,7 +1,7 @@
 //Campos de formulario
 
-const mascotaInput = document.querySelector('#mascota');
-const propietarioInput = document.querySelector('#propietario');
+const pacienteInput = document.querySelector('#paciente');
+const apellidosInput = document.querySelector('#apellidos');
 const telefonoInput = document.querySelector('#telefono');
 const fechaInput = document.querySelector('#fecha');
 const horaInput = document.querySelector('#hora');
@@ -56,20 +56,20 @@ class UI {
             this.limpiarHTML();
             
             citas.forEach(cita => {
-                const {mascota, propietario,telefono, fecha, hora, sintomas, id } = cita ;
+                const {paciente,apellidos, telefono, fecha, hora, sintomas, id } = cita ;
 
                 const divCita = document.createElement('div');
                 divCita.classList.add('cita', 'p-3');
                 divCita.dataset.id = id;
 
               //Scripting de los elementos de la citas
-              const mascotaParrafo = document.createElement('h2');
-              mascotaParrafo.classList.add( 'card-title', 'font-weight-bolder');
-              mascotaParrafo.textContent = mascota;
+              const pacienteParrafo = document.createElement('h2');
+              pacienteParrafo.classList.add( 'card-title', 'font-weight-bolder');
+              pacienteParrafo.textContent = paciente;
 
-              const propietarioParrafo = document.createElement('p');
-              propietarioParrafo.innerHTML = `
-               <span class="font-weight-bolder">Propietario: </span> ${propietario}
+              const apellidosParrafo = document.createElement('p');
+              apellidosParrafo.innerHTML = `
+               <span class="font-weight-bolder">Apellidos: </span> ${apellidos}
               `;
               const telefonoParrafo = document.createElement('p');
               telefonoParrafo.innerHTML = `
@@ -100,8 +100,8 @@ class UI {
                 btnEditar.onclick = ()=> cargarEdicion(cita);
 
               // Agregar los parrafos al div citas
-                divCita.appendChild(mascotaParrafo);
-                divCita.appendChild(propietarioParrafo);
+                divCita.appendChild(pacienteParrafo);
+                divCita.appendChild(apellidosParrafo);
                 divCita.appendChild(telefonoParrafo);
                 divCita.appendChild(fechaParrafo);
                 divCita.appendChild(horaParrafo);
@@ -128,8 +128,8 @@ const administrarCitas = new Citas();
 //Registro de eventos
 eventListeners();
 function eventListeners() {
-    mascotaInput.addEventListener('input', datosCita);
-    propietarioInput.addEventListener('input', datosCita);
+    pacienteInput.addEventListener('input', datosCita);
+    apellidosInput.addEventListener('input', datosCita);
     telefonoInput.addEventListener('input', datosCita);
     fechaInput.addEventListener('input', datosCita);
     horaInput.addEventListener('input', datosCita);
@@ -139,8 +139,8 @@ function eventListeners() {
 }
 //Objeto con la informacion de la cita
 const citaObj = {
-    mascota:'',
-    propietario: '',
+    paciente:'',
+    apellidos: '',
     telefono: '',
     fecha: '',
     hora: '',
@@ -159,10 +159,10 @@ function nuevaCita(e) {
     e.preventDefault();
 
     // extraer la informacion del objeto citaObj
-    const {mascota, propietario,telefono, fecha, hora, sintomas} = citaObj;
+    const {paciente, apellidos,telefono, fecha, hora, sintomas} = citaObj;
 
     //validacion
-    if (mascota === ''|| propietario ==='' || telefono === ''||fecha === '' || hora === '' || sintomas === ''){
+    if (paciente === ''|| apellidos ==='' || telefono === ''||fecha === '' || hora === '' || sintomas === ''){
     ui.imprimirAlerta('Todos los campos son obligatorios','error');
     return;
     }
@@ -197,8 +197,8 @@ function nuevaCita(e) {
 }
     //Reiniciar el Objeto
 function reiniciarOjt(){
-    citaObj.mascota = '';
-    citaObj.propietario='';
+    citaObj.paciente = '';
+    citaObj.apellidos = '';
     citaObj.telefono= '';
     citaObj.fecha='';
     citaObj.hora='';
@@ -217,11 +217,11 @@ function eliminarCita (id) {
 
  // cargar datos y el modo ediccion
 function cargarEdicion(cita){
-    const {mascota, propietario,telefono, fecha, hora, sintomas, id} = cita;
+    const {paciente, apellidos,telefono, fecha, hora, sintomas, id} = cita;
 
     // llenar los inputs
-    mascotaInput.value = mascota;
-    propietarioInput.value = propietario;
+    pacienteInput.value = paciente;
+    apellidosInput.value = apellidos;
     telefonoInput.value = telefono;
     fechaInput.value = fecha;
     horaInput.value = hora;
@@ -229,8 +229,8 @@ function cargarEdicion(cita){
 
     // Llenar el objeto
 
-    citaObj.mascota = mascota;
-    citaObj.propietario = propietario;
+    citaObj.paciente = paciente;
+    citaObj.apellidos = apellidos;
     citaObj.telefono = telefono;
     citaObj.fecha = fecha;
     citaObj.hora = hora;
